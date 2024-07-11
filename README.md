@@ -1,17 +1,19 @@
 # JMED-LLM: Japanese Medical Evaluation Dataset for Large Language Models
+日本語医療分野における大規模言語モデルの評価用データセット
+
 This dataset is designed for evaluating large language models in the Japanese medical domain.
 
 ## Tasks/Datasets
 
 |Task|Dataset|License|Original Dataset|
 |---|---|---|---|
-|Classification|CRADE: Case Report Adverse Drug Event|CC-BY-4.0|MedTxt-CR|
-||RRTNM: Radiology Reports Tumor Nodes Metastasis|CC-BY-4.0|NTCIR17 MedNLP-SC|
-||SNSDS: Social Network Service Disease Symptom|CC-BY-4.0|NTCIR-13 MedWeb|
-||JMMLU-Med: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
-|Named Entity Recognition (in progress)|CRNER: Case Report Named Entity Recognition|CC-BY-4.0|MedTxt-CR|
-||RRNER: Radiology Reports Named Entity Recognition|CC-BY-4.0|MedTxt-RR|
-||NRNER: Nursing Reports Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
+|Classification|**CRADE**: Case Report Adverse Drug Event|CC-BY-4.0|MedTxt-CR|
+||**RRTNM**: Radiology Reports Tumor Nodes Metastasis|CC-BY-4.0|NTCIR17 MedNLP-SC|
+||**SNSDS**: Social Network Service Disease Symptom|CC-BY-4.0|NTCIR-13 MedWeb|
+||**JMMLU-Med**: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
+|Named Entity Recognition (in progress)|**CRNER**: Case Report Named Entity Recognition|CC-BY-4.0|MedTxt-CR|
+||**RRNER**: Radiology Reports Named Entity Recognition|CC-BY-4.0|MedTxt-RR|
+||**NRNER**: Nursing Reports Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
 
 ### Description
 #### Classification
