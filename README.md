@@ -15,7 +15,7 @@ This dataset is designed for evaluating large language models in the Japanese me
 
 ### Description
 #### Classification
-全てのタスクは、100件づつデータで構成されています。また、均衡なデータセットであるため、Accuracyなどのシンプルな評価指標で適切な評価が可能です。
+全てのタスクは、100件づつのデータで構成されています。また、均衡なデータセットであるため、Accuracyなどのシンプルな評価指標で適切な評価が可能です。
 - **CRADE**: 
 症例報告の薬品症状から有害事象（ADE）の可能性を分類
 - **RRTNM**: 
