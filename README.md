@@ -11,9 +11,9 @@ This dataset is designed for evaluating large language models in the Japanese me
 ||**RRTNM**: Radiology Reports Tumor Nodes Metastasis|CC-BY-4.0|NTCIR17 MedNLP-SC|
 ||**SNSDS**: Social Network Service Disease Symptom|CC-BY-4.0|NTCIR-13 MedWeb|
 ||**JMMLU-Med**: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
-|Named Entity Recognition (in progress)|**CRNER**: Case Report Named Entity Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
-||**RRNER**: Radiology Reports Named Entity Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-RR)|
-||**NRNER**: Nursing Reports Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
+|Named Entity Recognition|**MRPDR**: Medical Report Positive Disease Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR, MedTxt-RR)|
+||**MRMR**: Medical Report Medicine Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
+||**NRNER**(in progress): Nursing Reports Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
 
 ### Description
 #### Classification
@@ -27,15 +27,16 @@ This dataset is designed for evaluating large language models in the Japanese me
 - **JMMLU-Med**: 
 JMMLUに含まれる医療問題のみ
 #### Named Entity Recognition
-- **CRNER**(in progress): 
-症例報告からの固有表現抽出
-- **RRNER**(in progress): 
-読影レポートからの固有表現抽出
+- **MRPDR**: 
+症例報告および読影レポートにおいて，患者に実際に認められた症状を抽出
+- **MRMR**: 
+症例報告および読影レポートにおいて，薬品に関する情報を抽出
 - **NRNER**(in progress): 
 模擬看護記録からの固有表現抽出
 
 
 ## How to build prompt (example)
+### Classification
 ```python
 import pandas as pd
 
@@ -53,6 +54,22 @@ df["options"] = df.filter(regex="option[A-E]").apply(lambda x: x.dropna().tolist
 system_prompt = "与えられた医学に関する質問と選択肢から、最も適切な回答を選択してください。なお、回答には選択肢のアルファベット（例：A）のみを含め、他には何も含めないことを厳守してください。"
 for question, options in zip(df["question"], df["options"]):
     user_prompt = build_user_prompt(question, options)
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+    ... # Generate answer using LLM
+```
+### Named Entity Recognition
+```python
+import pandas as pd
+
+
+df = pd.read_csv(dataset_path)
+system_prompt = "与えられた医学に関する質問から、最も適切な回答をしてください。なお、回答にはPythonのリスト形式（例：[\"回答1\", \"回答2\"]）のみを含め、他には何も含めないことを厳守してください。"
+
+for question in df["question"]:
+    user_prompt = question
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt},
