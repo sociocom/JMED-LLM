@@ -7,13 +7,15 @@ This dataset is designed for evaluating large language models in the Japanese me
 
 |Task|Dataset|License|Original Dataset|
 |---|---|---|---|
-|Classification|**CRADE**: Case Report Adverse Drug Event|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
+|文章分類|**CRADE**: Case Report Adverse Drug Event|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
 ||**RRTNM**: Radiology Reports Tumor Nodes Metastasis|CC-BY-4.0|NTCIR17 MedNLP-SC|
 ||**SNSDS**: Social Network Service Disease Symptom|CC-BY-4.0|NTCIR-13 MedWeb|
-||**JMMLU-Med**: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
-|Named Entity Recognition|**MRPDR**: Medical Report Positive Disease Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR, MedTxt-RR)|
+|文章ペア分類|**JCSTS**(in progress): Japanese Clinical Semantic Textual Similarity|||
+|多肢選択式問題|**JMMLU-Med**: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
+|固有表現抽出|**MRPDR**: Medical Report Positive Disease Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR, MedTxt-RR)|
 ||**MRMR**: Medical Report Medicine Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
 ||**NRNER**(in progress): Nursing Reports Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
+|文章マルチラベリング|**MRICD**(in progress): Medical Record ICD Code Generation|||
 
 ### Description
 #### Classification
