@@ -15,7 +15,7 @@ This dataset is designed for evaluating large language models in the Japanese me
 |固有表現抽出|**MRPDR**: Medical Report Positive Disease Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR, MedTxt-RR)|
 ||**MRMR**: Medical Report Medicine Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
 ||**NRNER**(in progress): Nursing Reports Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
-|文章マルチラベリング|**MRICD**(in progress): Medical Record ICD Code Generation|||
+|文章マルチラベリング|**MRICD**(in progress): Medical Record ICD Code|||
 
 ### Description
 #### Classification
