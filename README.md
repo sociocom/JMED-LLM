@@ -48,13 +48,13 @@ import pandas as pd
 
 def build_user_prompt(question, options):
     user_prompt = f"質問: {question}\n選択肢:\n"
-    alphabet = ["A", "B", "C", "D", "E"]
+    alphabet = ["A", "B", "C", "D", "E", "F"]
     for i, option in enumerate(options):
         user_prompt += f"{alphabet[i]}. {option}\n"
     return user_prompt
 
 df = pd.read_csv(dataset_path)
-df["options"] = df.filter(regex="option[A-E]").apply(lambda x: x.dropna().tolist(), axis=1)
+df["options"] = df.filter(regex="option[A-F]").apply(lambda x: x.dropna().tolist(), axis=1)
 
 system_prompt = "与えられた医学に関する質問と選択肢から、最も適切な回答を選択してください。なお、回答には選択肢のアルファベット（例：A）のみを含め、他には何も含めないことを厳守してください。"
 for question, options in zip(df["question"], df["options"]):
