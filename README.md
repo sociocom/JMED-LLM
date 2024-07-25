@@ -10,7 +10,7 @@ This dataset is designed for evaluating large language models in the Japanese me
 |文章分類|**CRADE**: Case Report Adverse Drug Event|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
 ||**RRTNM**: Radiology Reports Tumor Nodes Metastasis|CC-BY-4.0|NTCIR17 MedNLP-SC|
 ||**SMDIS**: Social Media Disease|CC-BY-4.0|NTCIR-13 MedWeb|
-|多肢選択式問題|**JMMLU-Med**: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
+|質問応答|**JMMLU-Med**: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
 |固有表現抽出|**MRNER-disease**: Medical Report Positive Disease Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR, MedTxt-RR)|
 ||**MRNER-medicine**: Medical Report Medicine Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
 ||**NRNER**: Nursing Report Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
@@ -25,7 +25,7 @@ This dataset is designed for evaluating large language models in the Japanese me
 読影レポートから癌のTNMステージングを分類
 - **SMDIS**: 
 模擬Tweetから病気や症状があるかを分類
-#### 多肢選択式問題
+#### 質問応答
 - **JMMLU-Med**: 
 JMMLUに含まれる医療問題
 #### 固有表現抽出
