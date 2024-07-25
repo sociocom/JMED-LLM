@@ -3,6 +3,10 @@
 
 This dataset is designed for evaluating large language models in the Japanese medical domain.
 
+## 関連資料
+- [JMED-LLM: 日本語医療LLM評価データセットの公開(2024/07/25)](https://speakerdeck.com/fta98/jmed-llm-ri-ben-yu-yi-liao-llmping-jia-detasetutonogong-kai)
+
+
 ## Tasks/Datasets
 
 |Task|Dataset|License|Original Dataset|
