@@ -9,43 +9,43 @@ This dataset is designed for evaluating large language models in the Japanese me
 
 ## Tasks/Datasets
 
-|Task|Dataset|License|Original Dataset|
+|Task|Dataset|License|Original Resouce|
 |---|---|---|---|
-|文章分類|**CRADE**: Case Report Adverse Drug Event|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
-||**RRTNM**: Radiology Reports Tumor Nodes Metastasis|CC-BY-4.0|NTCIR17 MedNLP-SC|
-||**SMDIS**: Social Media Disease|CC-BY-4.0|NTCIR-13 MedWeb|
-|質問応答|**JMMLU-Med**: Japanese Massive Multitask Language Understanding in Medical domain|CC-BY-SA-4.0|JMMLU|
-|固有表現抽出|**MRNER-disease**: Medical Report Positive Disease Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR, MedTxt-RR)|
-||**MRNER-medicine**: Medical Report Medicine Recognition|CC-BY-4.0|NTCIR-16 Real-MedNLP (MedTxt-CR)|
-||**NRNER**: Nursing Report Named Entity Recognition|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
-|文章類似度|**JCSTS**: Japanese Clinical Semantic Textual Similarity|CC-BY-NC-SA-4.0|Japanese-Clinical-STS|
+|質問応答|**JMMLU-Med**|CC-BY-SA-4.0|JMMLU|
+|固有表現抽出|**MRNER-disease**|CC-BY-4.0|NTCIR-16 Real-MedNLP MedTxt-CR Corpus, MedTxt-RR Corpus|
+||**MRNER-medicine**|CC-BY-4.0|NTCIR-16 Real-MedNLP MedTxt-CR Corpus|
+||**NRNER**|CC-BY-NC-SA-4.0|NursingRecord_NERdataset|
+|文書分類|**CRADE**|CC-BY-4.0|NTCIR-16 Real-MedNLP MedTxt-CR Corpus|
+||**RRTNM**|CC-BY-4.0|NTCIR-17 MedNLP-SC MexTxt-RR Corpus|
+||**SMDIS**|CC-BY-4.0|NTCIR-13 MedWeb Corpus|
+|文類似度|**JCSTS**|CC-BY-NC-SA-4.0|Japanese-Clinical-STS|
 
-### Description
-#### 文章分類
-全てのタスクは、100件づつのデータで構成されています。また、均衡なデータセットであるため、Accuracyなどのシンプルな評価指標で適切な評価が可能です。
-- **CRADE**: 
-症例報告の薬品症状から有害事象（ADE）の可能性を分類
-- **RRTNM**: 
-読影レポートから癌のTNMステージングを分類
-- **SMDIS**: 
-模擬Tweetから病気や症状があるかを分類
-#### 質問応答
-- **JMMLU-Med**: 
-JMMLUに含まれる医療問題
-#### 固有表現抽出
-- **MRNER-disease**: 
-症例報告および読影レポートにおいて，患者に実際に認められた症状を抽出
-- **MRNER-medicine**: 
-症例報告および読影レポートにおいて，薬品に関する情報を抽出
-- **NRNER**: 
-模擬看護記録からの固有表現抽出
-#### 文章類似度
-- **JCSTS**:
-2つの臨床テキストから文章類似度を分類
+## Description
+### 質問応答
+- **JMMLU-Med (Japanese Massive Multitask Language Understanding in Medical domain):** JMMLUから医療分野の問題のみを抽出し集約した，質問応答タスクである．professional\_medicine，medical\_genetics，clinical\_knowledge，anatomy，college\_medicine の五つの専門分野を対象とし，20問ずつで構成されている．
+
+### 固有表現抽出
+- **MRNER-disease (Medical Report Named Entity Recognition for positive disease):** 症例報告および読影レポートから患者に実際に認められた症状を抽出するタスクである．病変・症状エンティティのうち，certainty属性がpositiveのものを抽出対象とする．症例報告と読影レポート50件ずつで構成されている．
+
+- **MRNER-medicine (Medical Report Named Entity Recognition for medicine):** 症例報告から医薬品に関する情報を抽出するタスクである．
+MRNER-diseaseと同様のデータセットを用いているが，読影レポートには対象のエンティティが含まれていないため利用しない．
+
+- **NRNER (Nursing Record Named Entity Recognition):** 模擬看護記録から患者に実際に認められた症状および薬品に関する情報を抽出するタスクである．
+MRNERと同様のタスクだが，データセットのライセンスが異なるため別タスクとして設計した．
+
+### 文書分類
+- **CRADE (Case Report Adverse Drug Event):** 症例報告における薬品および症状から有害事象 (ADE) の可能性を分類するタスクである．Diseaseタグ（病名・症状を示す）のデータ48件とMedicineタグ（医薬品に関する情報を示す）のデータ52件から構成されている．
+
+- **RRTNM (Radiology Report Tumor Nodes Metastasis):** 肺がん患者の読影レポートから，がんのTNM分類を予測するタスクである．Tタグ15件，Nタグ40件，Mタグ45件から構成されている．
+
+- **SMDIS (Social Media Disease):** 模擬Tweetから投稿者または周囲の人々の病気や症状の有無を分類するタスクである．influenza，diarrhea，hayfever，coughタグがそれぞれ13件，headache，fever，runnynose，cold タグが12件ずつで構成されている．
+
+### 文類似度
+- **JCSTS (Japanese Clinical Semantic Textual Similarity):** 2文の意味的類似度を判定するタスク（STS）の医療版であり，症例報告を扱う．
 
 
 ## How to build prompt (example)
-### 文章分類、多肢選択式問題、文章類似度
+### 多肢選択式問題（質問応答，文書分類，文類似度）
 ```python
 import pandas as pd
 
