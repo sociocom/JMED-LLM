@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "jmed-llm"
+version = "0.1.0"
+description = ""
+authors = ["Fta98 <fukushima.takuya.fo2@naist.ac.jp>"]
+readme = "README.md"
+packages = [
+    { include = "src", from = "." },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+ipykernel = "^6.29.5"
+transformers = "^4.42.4"
+torch = "^2.3.1"
+accelerate = "^0.32.1"
+scikit-learn = "^1.5.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,13 @@
+task_names: ["jmmlu_med", "crade", "rrtnm", "smdis", "mrner_disease", "mrner_medicine", "nrner", "jcsts"]
+seed: 42
+max_new_tokens: 512
+pretrained_model_name_or_path: "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0"
+save_file_name: "llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0"
+dataset_dir: "datasets"
+output_dir: "results"
+use_system_role: True
+custom_chat_template: False # "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
+generator_kwargs:
+  do_sample: False
+  top_p: 1.0
+  repetition_penalty: 1.0

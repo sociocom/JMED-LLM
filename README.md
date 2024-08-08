@@ -40,48 +40,23 @@ MRNERと同様のタスクだが，データセットのライセンスが異な
 ### 文類似度
 - **JCSTS (Japanese Clinical Semantic Textual Similarity):** 2文の意味的類似度を判定するタスク（STS）の医療版であり，症例報告を扱う．
 
-
-## How to build prompt (example)
-### 多肢選択式問題（質問応答，文書分類，文類似度）
-```python
-import pandas as pd
-
-
-def build_user_prompt(question, options):
-    user_prompt = f"質問: {question}\n選択肢:\n"
-    alphabet = ["A", "B", "C", "D", "E", "F"]
-    for i, option in enumerate(options):
-        user_prompt += f"{alphabet[i]}. {option}\n"
-    return user_prompt
-
-df = pd.read_csv(dataset_path)
-df["options"] = df.filter(regex="option[A-F]").apply(lambda x: x.dropna().tolist(), axis=1)
-
-system_prompt = "与えられた医学に関する質問と選択肢から、最も適切な回答を選択してください。なお、回答には選択肢のアルファベット（例：A）のみを含め、他には何も含めないことを厳守してください。"
-for question, options in zip(df["question"], df["options"]):
-    user_prompt = build_user_prompt(question, options)
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt},
-    ]
-    ... # Generate answer using LLM
-```
-### 固有表現抽出
-```python
-import pandas as pd
-
-
-df = pd.read_csv(dataset_path)
-system_prompt = "与えられた医学に関する質問から、最も適切な回答をしてください。なお、回答にはPythonのリスト形式（例：[\"回答1\", \"回答2\"]）のみを含め、他には何も含めないことを厳守してください。"
-
-for question in df["question"]:
-    user_prompt = question
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt},
-    ]
-    ... # Generate answer using LLM
-```
+## How to evaluate
+1. レポジトリのクローン
+    ```
+    git clone https://github.com/sociocom/JMED-LLM.git
+    ```
+2. 必要なパッケージのインストール
+    ```
+    poetry install
+    ```
+3. config_template.yamlをコピーし設定ファイルを作成（評価対象モデルやプロンプトなど実験設定を必要に応じて変更してください）
+    ```
+    cp configs/config_template.yaml configs/your_config.yaml
+    ```
+4. 評価スクリプトの実行
+    ```
+    poetry run python scripts/evaluate.py --cfg configs/your_config.yaml
+    ```
 
 ## License
 The license for each dataset follows the terms of the original dataset's license. All other components are licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
