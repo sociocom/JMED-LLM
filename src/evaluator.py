@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import openai
 import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, cohen_kappa_score
@@ -9,22 +10,25 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from src.utils import (exact_f1_score, get_evaluation_messages,
                        get_first_uppercase_alphabet, get_list_from_string,
-                       partial_f1_score, set_seed)
+                       num_openai_tokens, partial_f1_score, set_seed)
 
 
 def evaluate(cfg):
     set_seed(cfg.seed)
-
-    tokenizer = AutoTokenizer.from_pretrained(cfg.pretrained_model_name_or_path)
-    if cfg.custom_chat_template:
-        tokenizer.chat_template = cfg.custom_chat_template
-    model = AutoModelForCausalLM.from_pretrained(cfg.pretrained_model_name_or_path, device_map="auto")
-    model.eval()
+    if cfg.model_type == "huggingface":
+        tokenizer = AutoTokenizer.from_pretrained(cfg.pretrained_model_name_or_path, trust_remote_code=cfg.trust_remote_code)
+        if cfg.custom_chat_template:
+            tokenizer.chat_template = cfg.custom_chat_template
+        model = AutoModelForCausalLM.from_pretrained(cfg.pretrained_model_name_or_path, device_map="auto", trust_remote_code=cfg.trust_remote_code)
+        model.eval()
+    elif cfg.model_type == "openai":
+        client = openai.OpenAI(api_key=cfg.openai_api_key)
 
     with torch.inference_mode():
         output_data = {}
         output_data["model_name"] = cfg.pretrained_model_name_or_path
-        output_data["chat_template"] = tokenizer.chat_template
+        if cfg.model_type == "huggingface":
+            output_data["chat_template"] = tokenizer.chat_template
         output_data["generator_kwargs"] = cfg.generator_kwargs
         for task_name in tqdm(cfg.task_names, desc="Processing tasks"):
             dataset_path = Path(cfg.dataset_dir).joinpath(f"{task_name}.csv")
@@ -37,9 +41,20 @@ def evaluate(cfg):
             response_results = []
             for row in tqdm(dataset.itertuples(), desc=f"Processing {task_name} dataset", total=len(dataset)):
                 messages = get_evaluation_messages(row, task_name=task_name, use_system_role=cfg.use_system_role)
-                input_ids = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt").to(model.device)
-                output_ids = model.generate(input_ids, max_new_tokens=cfg.max_new_tokens, **cfg.generator_kwargs)
-                response = tokenizer.decode(output_ids[0][input_ids.shape[1]:], skip_special_tokens=True)
+                if cfg.model_type == "huggingface":
+                    input_ids = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt").to(model.device)
+                    output_ids = model.generate(input_ids, max_new_tokens=cfg.max_new_tokens, **cfg.generator_kwargs)
+                    response = tokenizer.decode(output_ids[0][input_ids.shape[1]:], skip_special_tokens=True)
+                elif cfg.model_type == "openai":
+                    input_token_len = num_openai_tokens(messages, model=cfg.pretrained_model_name_or_path)
+                    max_tokens = input_token_len + cfg.max_new_tokens
+                    response = client.chat.completions.create(
+                        model=cfg.pretrained_model_name_or_path,
+                        messages=messages,
+                        seed=cfg.seed,
+                        max_tokens=max_tokens,
+                        **cfg.generator_kwargs
+                    ).choices[0].message.content
                 response_results.append(response)
 
             if task_name in ["jmmlu_med", "crade", "rrtnm", "smdis", "jcsts"]:
