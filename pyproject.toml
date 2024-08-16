@@ -16,6 +16,8 @@ transformers = "^4.42.4"
 torch = "^2.3.1"
 accelerate = "^0.32.1"
 scikit-learn = "^1.5.1"
+openai = "^1.40.6"
+tiktoken = "^0.7.0"
 
 
 [build-system]

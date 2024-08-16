@@ -1,6 +1,7 @@
 import random
 
 import numpy as np
+import tiktoken
 import torch
 
 
@@ -84,3 +85,17 @@ def partial_f1_score(answer_list, predict_list):
         precision = partial_count / len(predict) if len(predict) != 0 else 0
         f1_score += (2 * recall * precision) / (recall + precision) if (recall + precision) != 0 else 0
     return f1_score / len(answer_list)
+
+def num_openai_tokens(messages, model):
+    encoding = tiktoken.encoding_for_model(model)
+    tokens_per_message = 3
+    tokens_per_name = 1
+    num_tokens = 0
+    for message in messages:
+        num_tokens += tokens_per_message
+        for key, value in message.items():
+            num_tokens += len(encoding.encode(value))
+            if key == "name":
+                num_tokens += tokens_per_name
+    num_tokens += 3
+    return num_tokens
