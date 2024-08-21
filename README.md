@@ -2,7 +2,7 @@
 **JMED-LLM** (**J**apanese **M**edical **E**valuation **D**ataset for **L**arge **L**anguage **M**odels) は，日本語の医療分野における大規模言語モデルの評価用データセットです．JMED-LLMは，奈良先端科学技術大学院大学ソーシャル・コンピューティング研究室がシェアードタスクの開催などを通じて構築してきたデータセットを中心に，日本語の医療言語処理タスク向けに公開されている既存のオープンなデータセットをLLM評価に適したタスクに変換し統合したデータセットです．生成AIの医療応用のための性能評価を目的としており，医療応用のタスクごとに適したLLMを選択可能とすることを目指し今後も継続的にデータセットの拡充を行っていきます．
 
 ## 関連資料
-- [JMED-LLM: 日本語医療LLM評価データセットの公開(2024/07/25)](https://speakerdeck.com/fta98/jmed-llm-ri-ben-yu-yi-liao-llmping-jia-detasetutonogong-kai)
+- [JMED-LLM: 日本語医療LLM評価データセットの公開(2024/07/25)](https://speakerdeck.com/fta98/jmed-llm-ri-ben-yu-yi-liao-llmping-jia-detasetutonogong-kai) (スライド記載の内容は，データセット内容やLLMの性能など一部古い情報が含まれます)
 
 
 ## Tasks/Datasets
@@ -42,7 +42,8 @@ MRNERと同様のタスクだが，データセットのライセンスが異な
 - **JCSTS (Japanese Clinical Semantic Textual Similarity):** 2文の意味的類似度を判定するタスク（STS）の医療版であり，症例報告を扱う．
 
 ## Leaderboard
-多肢選択式タスクは，括弧外がkappa係数（CRADEとJCSTSは線形重み付き），括弧内がaccuracy．
+多肢選択式タスクは，括弧外が$\kappa$係数（CRADEとJCSTSは線形重み付き），括弧内がaccuracy．
+
 固有表現抽出タスクは，括弧外が部分一致F1，括弧内が完全一致F1．
 |Model|JMMLU-Med|MRNER-disease|MRNER-medicine|NRNER|CRADE|RRTNM|SMDIS|JCSTS|
 |---|---|---|---|---|---|---|---|---|
