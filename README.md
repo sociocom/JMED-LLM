@@ -42,7 +42,7 @@ MRNERと同様のタスクだが，データセットのライセンスが異な
 - **JCSTS (Japanese Clinical Semantic Textual Similarity):** 2文の意味的類似度を判定するタスク（STS）の医療版であり，症例報告を扱う．
 
 ## Leaderboard
-多肢選択式タスクは，括弧外が$\kappa$係数（CRADEとJCSTSは線形重み付き），括弧内がaccuracy．
+多肢選択式タスクは，括弧外がkappa係数（CRADEとJCSTSは線形重み付き），括弧内がaccuracy．
 
 固有表現抽出タスクは，括弧外が部分一致F1，括弧内が完全一致F1．
 |Model|JMMLU-Med|MRNER-disease|MRNER-medicine|NRNER|CRADE|RRTNM|SMDIS|JCSTS|
