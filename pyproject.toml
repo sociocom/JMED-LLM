@@ -18,6 +18,8 @@ accelerate = "^0.32.1"
 scikit-learn = "^1.5.1"
 openai = "^1.40.6"
 tiktoken = "^0.7.0"
+einops = "^0.8.0"
+transformers-stream-generator = "^0.0.5"
 
 
 [build-system]
