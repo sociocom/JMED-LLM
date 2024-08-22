@@ -84,6 +84,6 @@ def evaluate(cfg):
             task_data["predict"] = predict_results
             output_data[task_name] = task_data
             
-        output_path = Path(cfg.output_dir).joinpath(f"{cfg.save_file_name}.csv")
+        output_path = Path(cfg.output_dir).joinpath(f"{cfg.save_file_name}.json")
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(output_data, f, ensure_ascii=False, indent=2)

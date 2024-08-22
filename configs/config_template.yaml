@@ -1,6 +1,7 @@
 task_names: ["jmmlu_med", "crade", "rrtnm", "smdis", "mrner_disease", "mrner_medicine", "nrner", "jcsts"]
 seed: 42
 max_new_tokens: 512
+trust_remote_code: False
 model_type: "huggingface" # "huggingface", "openai", "ollama"
 openai_api_key: False
 pretrained_model_name_or_path: "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0"
