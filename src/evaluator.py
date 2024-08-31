@@ -6,7 +6,7 @@ import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, cohen_kappa_score
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 from src.utils import (exact_f1_score, get_evaluation_messages,
                        get_first_uppercase_alphabet, get_list_from_string,
@@ -19,7 +19,22 @@ def evaluate(cfg):
         tokenizer = AutoTokenizer.from_pretrained(cfg.pretrained_model_name_or_path, trust_remote_code=cfg.trust_remote_code)
         if cfg.custom_chat_template:
             tokenizer.chat_template = cfg.custom_chat_template
-        model = AutoModelForCausalLM.from_pretrained(cfg.pretrained_model_name_or_path, device_map="auto", trust_remote_code=cfg.trust_remote_code)
+        if cfg.quant_type == "none":
+            model = AutoModelForCausalLM.from_pretrained(cfg.pretrained_model_name_or_path, device_map="auto", trust_remote_code=cfg.trust_remote_code)
+        elif cfg.quant_type == "8bit":
+            model = AutoModelForCausalLM.from_pretrained(
+                cfg.pretrained_model_name_or_path, 
+                device_map="auto", 
+                trust_remote_code=cfg.trust_remote_code,
+                quantization_config=BitsAndBytesConfig(load_in_8bit=True)
+            )
+        elif cfg.quant_type == "4bit":
+            model = AutoModelForCausalLM.from_pretrained(
+                cfg.pretrained_model_name_or_path, 
+                device_map="auto", 
+                trust_remote_code=cfg.trust_remote_code,
+                quantization_config=BitsAndBytesConfig(load_in_4bit=True)
+            )
         model.eval()
     elif cfg.model_type == "openai":
         client = openai.OpenAI(api_key=cfg.openai_api_key)
