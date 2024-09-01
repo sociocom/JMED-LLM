@@ -6,7 +6,8 @@ import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, cohen_kappa_score
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers import (AutoModelForCausalLM, AutoTokenizer,
+                          BitsAndBytesConfig)
 
 from src.utils import (exact_f1_score, get_evaluation_messages,
                        get_first_uppercase_alphabet, get_list_from_string,
