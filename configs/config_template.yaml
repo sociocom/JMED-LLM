@@ -2,10 +2,10 @@ task_names: ["jmmlu_med", "crade", "rrtnm", "smdis", "mrner_disease", "mrner_med
 seed: 42
 max_new_tokens: 512
 trust_remote_code: False
-model_type: "huggingface" # "huggingface", "openai", "ollama"
+model_type: "bedrock" # "huggingface", "openai", "ollama", "bedrock"
 openai_api_key: False
-pretrained_model_name_or_path: "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0"
-save_file_name: "llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0"
+pretrained_model_name_or_path: "anthropic.claude-3-5-sonnet-20240620-v1:0"
+save_file_name: "claude-3-5-sonnet-20240620-v1-0"
 dataset_dir: "datasets"
 output_dir: "results"
 use_system_role: True
