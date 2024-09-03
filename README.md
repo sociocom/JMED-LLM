@@ -2,7 +2,9 @@
 **JMED-LLM** (**J**apanese **M**edical **E**valuation **D**ataset for **L**arge **L**anguage **M**odels) は，日本語の医療分野における大規模言語モデルの評価用データセットです．JMED-LLMは，奈良先端科学技術大学院大学ソーシャル・コンピューティング研究室がシェアードタスクの開催などを通じて構築してきたデータセットを中心に，日本語の医療言語処理タスク向けに公開されている既存のオープンなデータセットをLLM評価に適したタスクに変換し統合したデータセットです．生成AIの医療応用のための性能評価を目的としており，医療応用のタスクごとに適したLLMを選択可能とすることを目指し今後も継続的にデータセットの拡充を行っていきます．
 
 ## 関連資料
-- [JMED-LLM: 日本語医療LLM評価データセットの公開(2024/07/25)](https://speakerdeck.com/fta98/jmed-llm-ri-ben-yu-yi-liao-llmping-jia-detasetutonogong-kai) (スライド記載の内容は，データセット内容やLLMの性能など一部古い情報が含まれます)
+※スライド記載の内容は一部古い情報が含まれる場合があります
+- [日本語医療LLM評価ベンチマークの構築と性能分析(2024/09/03，NL研)](https://speakerdeck.com/fta98/ri-ben-yu-yi-liao-llmping-jia-bentimakunogou-zhu-toxing-neng-fen-xi) 
+- [JMED-LLM: 日本語医療LLM評価データセットの公開(2024/07/25，LLM-jp)](https://speakerdeck.com/fta98/jmed-llm-ri-ben-yu-yi-liao-llmping-jia-detasetutonogong-kai) 
 
 
 ## Tasks/Datasets
