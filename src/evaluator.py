@@ -4,6 +4,7 @@ from pathlib import Path
 import openai
 import pandas as pd
 import torch
+import boto3
 from sklearn.metrics import accuracy_score, cohen_kappa_score
 from tqdm import tqdm
 from transformers import (AutoModelForCausalLM, AutoTokenizer,
@@ -39,6 +40,13 @@ def evaluate(cfg):
         model.eval()
     elif cfg.model_type == "openai":
         client = openai.OpenAI(api_key=cfg.openai_api_key)
+    elif cfg.model_type == "bedrock":
+        client = boto3.client("bedrock-runtime", region_name="ap-northeast-1")
+        inferenceConfig = {
+            "topP": cfg.generator_kwargs["top_p"],
+            "maxTokens": cfg.max_new_tokens
+        }
+
 
     with torch.inference_mode():
         output_data = {}
@@ -71,6 +79,15 @@ def evaluate(cfg):
                         max_tokens=max_tokens,
                         **cfg.generator_kwargs
                     ).choices[0].message.content
+                elif cfg.model_type == "bedrock":
+                    system = [{"text":message["content"] for message in messages if message["role"] == "system"}]
+                    messages = [{"role":"user", "content": [{"text" : message["content"] for message in messages if message["role"] == "user"}]}]
+                    response = client.converse(
+                        modelId = cfg.pretrained_model_name_or_path,
+                        inferenceConfig = inferenceConfig,
+                        system = system,
+                        messages = messages
+                    )["output"]["message"]["content"][0]["text"]
                 response_results.append(response)
 
             if task_name in ["jmmlu_med", "crade", "rrtnm", "smdis", "jcsts"]:

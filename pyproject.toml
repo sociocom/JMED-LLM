@@ -21,6 +21,7 @@ tiktoken = "^0.7.0"
 einops = "^0.8.0"
 transformers-stream-generator = "^0.0.5"
 bitsandbytes = "^0.43.3"
+boto3 = "^1.35.10"
 
 
 [build-system]
